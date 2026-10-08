@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class TransformerProtectionSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Protection limits
+        final double MAX_TEMPERATURE = 80.0;   // °C
+        final double MAX_VOLTAGE = 250.0;      // V
+        final double MIN_VOLTAGE = 180.0;      // V
+        final double MAX_CURRENT = 10.0;       // A
+
+        System.out.println("=================================");
+        System.out.println("   TRANSFORMER PROTECTION SYSTEM");
+        System.out.println("=================================");
+
+        System.out.print("Enter Transformer Temperature (°C): ");
+        double temperature = sc.nextDouble();
+
+        System.out.print("Enter Transformer Voltage (V): ");
+        double voltage = sc.nextDouble();
+
+        System.out.print("Enter Transformer Current (A): ");
+        double current = sc.nextDouble();
+
+        boolean fault = false;
+
+        System.out.println("\n--------- SYSTEM STATUS ---------");
+
+        // Temperature protection
+        if (temperature > MAX_TEMPERATURE) {
+            System.out.println("FAULT: Transformer Overheating!");
+            fault = true;
+        }
+
+        // Over-voltage protection
+        if (voltage > MAX_VOLTAGE) {
+            System.out.println("FAULT: Over Voltage!");
+            fault = true;
+        }
+
+        // Under-voltage protection
+        if (voltage < MIN_VOLTAGE) {
+            System.out.println("FAULT: Under Voltage!");
+            fault = true;
+        }
+
+        // Over-current protection
+        if (current > MAX_CURRENT) {
+            System.out.println("FAULT: Over Current!");
+            fault = true;
+        }
+
+        // Final protection decision
+        if (fault) {
+            System.out.println("\n⚠ PROTECTION ACTIVE");
+            System.out.println("Transformer Supply: DISCONNECTED");
+        } else {
+            System.out.println("\n✓ SYSTEM NORMAL");
+            System.out.println("Transformer Supply: CONNECTED");
+        }
+
+        sc.close();
+    }
+}
